@@ -1,0 +1,39 @@
+<form #formularz="ngForm">
+    <div>
+        <h1>Zamówienie:</h1>
+        <label>
+            <span>Imię i nazwisko:</span>
+            <input type="text" id="imienazwisko" [(ngModel)]="imienazwisko" name="imienazwisko" required #imienazwiskoForm="ngModel">
+            <div class="alert" *ngIf="imienazwiskoForm.invalid && imienazwiskoForm.touched">
+                Pole imię i nazwisko jest wymagane
+            </div>
+        </label>
+        <label>
+            <span>Email:</span>
+            <input type="text" id="email" [(ngModel)]="email" name="email" required pattern=".+@.+" #emailForm="ngModel">
+            <div class="alert" *ngIf="emailForm.invalid && emailForm.touched"></div>
+            <div class="alert" *ngIf="emailForm.touched && emailForm.errors?.['pattern']">
+                To nie jest email
+            </div>
+        </label>
+        <label>
+            <span>Produkt:</span>
+            <select id="produkt" [(ngModel)]="produkt" name="produkt" required>
+                <option value="pralka">Pralka</option>
+                <option value="telewizor">Telewizor</option>
+                <option value="lodowka">Lodówka</option>
+                <option value="laptop">Laptop</option>
+            </select>
+        </label>
+        <label>
+            <span>Ilość:</span>
+            <input type="number" id="ilosc" [(ngModel)]="ilosc" name="ilosc" min="1" max="5">
+        </label>
+        <label>
+            <span>Wiadomość:</span>
+            <textarea id="wiadomosc" [(ngModel)]="wiadomosc" name="wiadomosc"></textarea>
+            <button type="button" (click)="formularz.resetForm()">Resetuj</button>
+            <button type="submit" class="przycisk" (click)="onSubmit()" [disabled]="!formularz.form.valid">Zamów</button>
+        </label>
+    </div>
+</form>

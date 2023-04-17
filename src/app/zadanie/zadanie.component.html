@@ -1,0 +1,34 @@
+<form #zadanie="ngForm">
+    <div>
+        <label for="imienazwisko">Imie i nazwisko</label>
+        <input type="text" name="imienazwisko" id="imienazwisko" required [(ngModel)]="imienazwisko" #imienazwiskoForm="ngModel">
+        <div class="alert" *ngIf="imienazwiskoForm.invalid && imienazwiskoForm.touched">
+            Pole imię i nazwisko jest wymagane
+        </div>
+
+        <label for="ocena">Oceń jakość obsługi klienta</label>
+        <select name="ocena" id="ocena" required [(ngModel)]="ocena">
+            <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
+        </select>
+
+        <div>
+            <span>Status Zawodowy</span><br>
+            <input type="radio" name="status" id="uczen">
+            <label for="uczen">Uczeń / Student</label><br>
+            <input type="radio" name="status" id="pracujacy">
+            <label for="pracujacy">Pracujący</label><br>
+            <input type="radio" name="status" id="bezrobotny">
+            <label for="bezrobotny">Bezrobotny</label><br>
+            <input type="radio" name="status" id="emerytura">
+            <label for="emerytura">Na Rencie / Emeryturze</label>
+        </div>
+
+        <div *ngIf="zadanie.form.valid">Dane Poprawne</div>
+
+        <button type="submit" (click)="onClick()" [disabled]="!zadanie.form.valid">Prześlij</button>
+    </div>
+</form>
